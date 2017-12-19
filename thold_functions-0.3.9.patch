@@ -1,0 +1,25 @@
+--- thold_functions.php.orig	2008-01-03 17:58:20.000000000 +0100
++++ thold_functions.php	2008-01-25 11:05:24.000000000 +0100
+@@ -491,18 +491,18 @@
+ 		return -1; // Baseline reference value not yet established
+ 	}
+ 	$current_value = get_current_value($rra_id,$ds);
+-	$ref_value_max = round(max($ref_values));
+-	$ref_value_min = round(min($ref_values));
++	$ref_value_max = max($ref_values);
++	$ref_value_min = min($ref_values);
+ 	
+ 	$blt_low = false;
+ 	$blt_high = false;
+ 	
+ 	if($pct_down != "") {
+-		$blt_low = round($ref_value_min - ($ref_value_min * $pct_down / 100));
++		$blt_low = ($ref_value_min - abs($ref_value_min * $pct_down / 100));
+ 	}
+ 	
+ 	if($pct_up != "") {
+-		$blt_high = round($ref_value_max + ($ref_value_max * $pct_up / 100));
++		$blt_high = ($ref_value_max + abs($ref_value_max * $pct_up / 100));
+ 	}
+ 	
+ 	$failed = 0;
