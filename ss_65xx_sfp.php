@@ -15,8 +15,8 @@
  | GNU General Public License for more details.                            |
  +-------------------------------------------------------------------------+
  | name    : ss_65xx_sfp.php                                               |
- | version : 0.2.1                                                         |
- | date    : 20070910                                                      |
+ | version : 0.2.2                                                         |
+ | date    : 20080429                                                      |
  +-------------------------------------------------------------------------+
 */
 $no_http_headers = true;
@@ -51,13 +51,13 @@ function ss_sfp($hostname, $snmp_community, $snmp_version, $cmd, $direction = ""
 	$tx_status = 0;
 	$int = "";
 	$snmp_retries = read_config_option("snmp_retries");
-	$var = (cacti_snmp_walk($hostname, $snmp_community, ".1.3.6.1.4.1.9.9.91.1.1.1.1.1", $snmp_version, "", "", 161, 5000, $snmp_retries));
+	$var = (cacti_snmp_walk($hostname, $snmp_community, ".1.3.6.1.4.1.9.9.91.1.1.1.1.1", $snmp_version, "", "", 161, 5000, $snmp_retries, SNMP_POLLER));
 
 	if ($cmd == "index" || $cmd == "query") {
 		for ($i=0;$i<(count($var));$i++) {
 			if ($var[$i]["value"] == "14") {                // found a dBm entry
-				$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries));
-				$sensor_status = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries));
+				$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries, SNMP_POLLER));
+				$sensor_status = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries, SNMP_POLLER));
       	preg_match("/[^\ ]+/", $sensor_name, $oid_name); // don't care about the rest of the string
 				if ($cmd == "index") {
       		print $oid_name[0]."\n";
@@ -101,7 +101,7 @@ function ss_sfp($hostname, $snmp_community, $snmp_version, $cmd, $direction = ""
 	} elseif ($cmd == "get") {
 		for ($i=0;$i<(count($var));$i++) {
 			if ($var[$i]["value"] == "14") {                // found a dBm entry
-				$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version, "", "", "", 5000, $snmp_retries));
+				$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version, "", "", "", 5000, $snmp_retries, SNMP_POLLER));
 				if ($direction == "tx") { 
 					$int=$interface." Transmit Power Sensor"; 
 				} elseif ($direction == "rx") { 
@@ -109,8 +109,8 @@ function ss_sfp($hostname, $snmp_community, $snmp_version, $cmd, $direction = ""
 				}
 				preg_match("/[^\ ]+/", $sensor_name, $oid_name);
 				if (strstr($int, $sensor_name)) {
-					if (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries) == "1") {
-						$result = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries))/10;
+					if (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries, SNMP_POLLER) == "1") {
+						$result = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.\\1', $var[$i]["oid"]), $snmp_version, "", "", 161, 5000, $snmp_retries, SNMP_POLLER))/10;
 					}
 					else { $result = "-40"; // lights are off
 					}
