@@ -1,8 +1,8 @@
 <interface>
         <name>Get Cisco SFP Statistics</name>
         <script_path>|path_cacti|/scripts/ss_65xx_sfp.php</script_path>
-        <script_function>ss_65xx_sfp</script_function>
         <script_server>php</script_server>
+	<script_function>ss_sfp</script_function>
         <arg_prepend>|host_hostname| |host_id| |host_snmp_version|:|host_snmp_port|:|host_snmp_timeout|:|host_ping_retries|:|host_max_oids|:|host_snmp_community|:|host_snmp_username|:|host_snmp_password|:|host_snmp_auth_protocol|:|host_snmp_priv_passphrase|:|host_snmp_priv_protocol|:|host_snmp_context|</arg_prepend>
         <arg_index>index</arg_index>
         <arg_query>query</arg_query>
