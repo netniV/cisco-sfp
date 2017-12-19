@@ -1,42 +1,46 @@
 <interface>
-        <name>Get Cisco SFP Statistics</name>
-        <script_path>|path_cacti|/scripts/ss_65xx_sfp.php</script_path>
-        <script_server>php</script_server>
+	<name>Get Cisco SFP Statistics</name>
+	<description>Get Cisco SFP Statistics</description>
+	<script_path>|path_cacti|/scripts/ss_65xx_sfp.php</script_path>
 	<script_function>ss_sfp</script_function>
-        <arg_prepend>|host_hostname| |host_id| |host_snmp_version|:|host_snmp_port|:|host_snmp_timeout|:|host_ping_retries|:|host_max_oids|:|host_snmp_community|:|host_snmp_username|:|host_snmp_password|:|host_snmp_auth_protocol|:|host_snmp_priv_passphrase|:|host_snmp_priv_protocol|:|host_snmp_context|</arg_prepend>
-        <arg_index>index</arg_index>
-        <arg_query>query</arg_query>
-        <arg_get>get</arg_get>
-        <index_order>device</index_order>
-        <index_order_type>alphabetic</index_order_type>
-        <index_title_format>|chosen_order_field|</index_title_format>
-        <output_delimeter>:</output_delimeter>
-        <fields>
-                <device>
-                        <name>Interface</name>
-                        <direction>input</direction>
-                        <query_name>index</query_name>
-                </device>
-                <status>
-                        <name>Operational status</name>
-                        <direction>input</direction>
-                        <query_name>status</query_name>
-                </status>
-                <descr>
-                        <name>Interface Description</name>
-                        <direction>input</direction>
-                        <query_name>descr</query_name>
-                </descr>
-                <SensorTXPower>
-                        <name>SensorTXPower</name>
-                        <direction>output</direction>
-                        <query_name>tx</query_name>
-                </SensorTXPower>
-                <SensorRXPower>
-                        <name>SensorRXPower</name>
-                        <direction>output</direction>
-                        <query_name>rx</query_name>
-                </SensorRXPower>
+	<script_server>php</script_server>
+	<arg_prepend>|host_hostname|:|host_id|:|host_snmp_version|:|host_snmp_port|:|host_snmp_timeout|:|host_ping_retries|:|host_max_oids|:|host_snmp_community|:|host_snmp_username|:|host_snmp_password|:|host_snmp_context|:|host_snmp_auth_protocol|:|host_snmp_priv_passphrase|:|host_snmp_priv_protocol|</arg_prepend>
+	<arg_index>index</arg_index>
+	<arg_query>query</arg_query>
+	<arg_get>get</arg_get>
+	<output_delimeter>:</output_delimeter>
+	<index_order>sfpindex</index_order>
 
-        </fields>
+	<fields>
+		<sfpindex>
+			<name>SFP Index</name>
+			<direction>input</direction>
+			<query_name>sfpindex</query_name>
+		</sfpindex>
+		<status>
+			<name>Operational status</name>
+			<direction>input</direction>
+			<query_name>status</query_name>
+		</status>
+		<interface>
+			<name>Interface name</name>
+			<direction>input</direction>
+			<query_name>interface</query_name>
+		</interface>
+		<descr>
+			<name>Interface Description</name>
+			<direction>input</direction>
+			<query_name>descr</query_name>
+		</descr>
+		<SensorTXPower>
+			<name>SensorTXPower</name>
+			<direction>output</direction>
+			<query_name>tx</query_name>
+		</SensorTXPower>
+		<SensorRXPower>
+			<name>SensorRXPower</name>
+			<direction>output</direction>
+			<query_name>rx</query_name>
+		</SensorRXPower>
+	</fields>
 </interface>
