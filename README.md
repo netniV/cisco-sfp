@@ -1,7 +1,8 @@
 # cisco-sfp for cacti 0.8.x
 This is to host code for https://forums.cacti.net/viewtopic.php?f=19&amp;t=23089 for others
 
-Cisco SFP statistics for cacti (c) 2007-2008 sodium
+Cisco SFP statistics for cacti (c) 2007-2008 sodium 
+in 2017 the code copyright moved Github to Creative Commons BY-NC-SA
 
 This code is compatibile with cacti 0.8.x.  There may be issues with the 1.x versions of cacti.
 
