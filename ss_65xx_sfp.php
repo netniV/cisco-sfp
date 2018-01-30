@@ -111,8 +111,11 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 						case "status":
 							$index = preg_match('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i', $var[$i]["oid"], $matches);
 							//get interface status: 1 = ok, 2 = unavailable, 3 = nonoperational
-							$sensor_status = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.' . $matches[1], $snmp_version, $snmp_auth_username, $snmp_auth_password,
-$snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER);
+							$sensor_status = cacti_snmp_get($hostname, $snmp_community,
+								'.1.3.6.1.4.1.9.9.91.1.1.1.1.5.' . $matches[1], $snmp_version,
+								$snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
+								$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context,
+								$snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER);
 
 							if ($tx_status == 0) {
 								if ($sensor_status == 1) {
@@ -139,24 +142,29 @@ $snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, 
 							break;
 						case "descr":
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
-							$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version,
-$snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER));
-		
+							$sensor_name = (cacti_snmp_get($hostname, $snmp_community,
+								preg_replace('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i',
+									'.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]),
+								$snmp_version, $snmp_auth_username, $snmp_auth_password,
+								$snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol,
+								$snmp_context, $snmp_port, $snmp_timeout, $ping_retries,
+								$max_oids, SNMP_POLLER));
+
 							// Extract the Slot/Module/Port from "subslot 3/0 transceiver 8 Rx Power Sensor"
 							if (preg_match_all("/subslot (\d+\/\d+) transceiver (\d+) .x Power Sensor/",$sensor_name,$matches,PREG_PATTERN_ORDER)) {
-		
+
 								$modSlotPort = $matches[1][0].'/'.$matches[2][0];
 								$oid_name[0] = "";	// Reset this to null
 		
-								// Test interface exists in the host_snmp_cache table 
+								// Test interface exists in the host_snmp_cache table
 								// Try to match Gig and Ten Gig combinations
 								foreach (array('GigabitEthernet','TenGigabitEthernet') as $type) {
 									$test_name = $type.$modSlotPort;
 		
 									if (db_fetch_cell(
-										"select snmp_index from host_snmp_cache 
-											where host_id = '$host_id' and 
-											field_value = '$test_name' and 
+										"select snmp_index from host_snmp_cache
+											where host_id = '$host_id' and
+											field_value = '$test_name' and
 											field_name = 'ifDescr'")) {
 		
 										$oid_name[0] = $test_name;
@@ -181,8 +189,13 @@ $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passph
 							break;
 						case "interface":
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
-							$sensor_name = (cacti_snmp_get($hostname, $snmp_community, ereg_replace('.*\.[0-9]+\.[0-9]+\.([0-9]+)$', '.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]), $snmp_version,
-$snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER));
+							$sensor_name = (cacti_snmp_get($hostname, $snmp_community,
+								preg_replace('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i',
+									'.1.3.6.1.2.1.47.1.1.1.1.2.\\1', $var[$i]["oid"]),
+								$snmp_version, $snmp_auth_username, $snmp_auth_password,
+								$snmp_auth_protocol, $snmp_priv_passphrase, $snmp_priv_protocol,
+								$snmp_context, $snmp_port, $snmp_timeout, $ping_retries,
+								$max_oids, SNMP_POLLER));
 		
 							// Extract the Slot/Module/Port from "subslot 3/0 transceiver 8 Rx Power Sensor"
 							if (preg_match_all("/subslot (\d+\/\d+) transceiver (\d+) .x Power Sensor/",$sensor_name,$matches,PREG_PATTERN_ORDER)) {
@@ -190,15 +203,15 @@ $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passph
 								$modSlotPort = $matches[1][0].'/'.$matches[2][0];
 								$oid_name[0] = "";	// Reset this to null
 		
-								// Test interface exists in the host_snmp_cache table 
+								// Test interface exists in the host_snmp_cache table
 								// Try to match Gig and Ten Gig combinations
 								foreach (array('GigabitEthernet','TenGigabitEthernet') as $type) {
 									$test_name = $type.$modSlotPort;
 		
 									if (db_fetch_cell(
-										"select snmp_index from host_snmp_cache 
-											where host_id = '$host_id' and 
-											field_value = '$test_name' and 
+										"select snmp_index from host_snmp_cache
+											where host_id = '$host_id' and
+											field_value = '$test_name' and
 											field_name = 'ifDescr'")) {
 		
 										$oid_name[0] = $test_name;
@@ -238,11 +251,23 @@ $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passph
 				$int=$arg2 + 1;
 			}
 
-			if (cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.' . $int, $snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol, $snmp_priv_passphrase,
-$snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER) == "1") {
-				$result = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.' . $int, $snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
-$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER)/10;
+			$int_status = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.5.' . $int,
+				$snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
+				$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout,
+				$ping_retries, $max_oids, SNMP_POLLER);
+			if ($int_status == "1") {
+				$result = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.' . $int,
+					$snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
+					$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port,
+					$snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER)/10;
 			} else {
+				if (!isset($int_status)) {
+					$int_status = '<unset>');
+				} else if (is_array($int_status)) {
+					$int_status = '<array#'.sizeof($int_status).'>';
+				}
+
+				cacti_log('Failed to retrieve valid status for Cisco SFP Index \''.$int.\', found: \'' .$int_status.'\'',false,'CISCO-SFP',POLLER_VERBOSITY_HIGH);
 				// if not ok, send -40, symbolic for lights off
 				$result = "-40";
 			}
