@@ -262,12 +262,12 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 					$snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER)/10;
 			} else {
 				if (!isset($int_status)) {
-					$int_status = '<unset>');
+					$int_status = '<unset>';
 				} else if (is_array($int_status)) {
 					$int_status = '<array#'.sizeof($int_status).'>';
 				}
 
-				cacti_log('Failed to retrieve valid status for Cisco SFP Index \''.$int.\', found: \'' .$int_status.'\'',false,'CISCO-SFP',POLLER_VERBOSITY_HIGH);
+				cacti_log('Failed to retrieve valid status for Cisco SFP Index \''.$int.'\', found: \'' .$int_status.'\'',false,'CISCO-SFP',POLLER_VERBOSITY_HIGH);
 				// if not ok, send -40, symbolic for lights off
 				$result = "-40";
 			}
