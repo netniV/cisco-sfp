@@ -140,6 +140,7 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 								$rx_status_string = "";
 							}
 							break;
+
 						case "descr":
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
 							$sensor_name = (cacti_snmp_get($hostname, $snmp_community,
@@ -155,18 +156,18 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 
 								$modSlotPort = $matches[1][0].'/'.$matches[2][0];
 								$oid_name[0] = "";	// Reset this to null
-		
+
 								// Test interface exists in the host_snmp_cache table
 								// Try to match Gig and Ten Gig combinations
 								foreach (array('GigabitEthernet','TenGigabitEthernet') as $type) {
 									$test_name = $type.$modSlotPort;
-		
+
 									if (db_fetch_cell(
 										"select snmp_index from host_snmp_cache
 											where host_id = '$host_id' and
 											field_value = '$test_name' and
 											field_name = 'ifDescr'")) {
-		
+
 										$oid_name[0] = $test_name;
 									}
 								}
@@ -174,19 +175,20 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 							else {				
 								preg_match("/[^\ ]+/", $sensor_name, $oid_name); // don't care about the rest of the string
 							}
-		
+
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
 							$index = preg_match('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i', $var[$i]["oid"], $matches);
-		
+
 							$host_id = db_fetch_cell("select id from host where hostname = '$hostname'");
 							$snmp_index = db_fetch_cell("select snmp_index from host_snmp_cache where host_id = '$host_id' and field_value = '$oid_name[0]' and field_name = 'ifDescr'");
 							$alias = db_fetch_cell("select field_value from host_snmp_cache where snmp_index='$snmp_index' and host_id='$host_id' and field_name='ifAlias'");
 							$alias = preg_replace("/:/","-",$alias); // Fix script server exploding args
-	
+
 							// print it, but skip RX because descriptions are the same
 							print $matches[1] . ":" . $alias . "\n";
 							$i=$i+1;
 							break;
+
 						case "interface":
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
 							$sensor_name = (cacti_snmp_get($hostname, $snmp_community,
@@ -213,15 +215,14 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 											where host_id = '$host_id' and
 											field_value = '$test_name' and
 											field_name = 'ifDescr'")) {
-		
 										$oid_name[0] = $test_name;
 									}
 								}
 							}
-							else {				
+							else {
 								preg_match("/[^\ ]+/", $sensor_name, $oid_name); // don't care about the rest of the string
 							}
-		
+
 							// get interface name, will duplicate because of TX/RX both having dBm sensors (1st line = TX, 2nd = RX)
 							$index = preg_match('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i', $var[$i]["oid"], $matches);
 
@@ -234,6 +235,7 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 							print $matches[1] . ":" . $alias . "\n";
 							$i=$i+1;
 							break;
+
 						case "sfpindex":
 							$index = preg_match('/.*\.[0-9]+\.[0-9]+\.([0-9]+)$/i', $var[$i]["oid"], $matches);
 							// print it, but skip RX
@@ -259,7 +261,7 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 				$result = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.' . $int,
 					$snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
 					$snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port,
-					$snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER)/10;
+					$snmp_timeout, $ping_retries, SNMP_POLLER)/10;
 			} else {
 				if (!isset($int_status)) {
 					$int_status = '<unset>';
