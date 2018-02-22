@@ -70,49 +70,6 @@
 			</hash_0700185be8fa85472d89c621790b43510b5043>
 		</fields>
 	</hash_030018332111d8b54ac8ce939af87a7eac0c06>
-	<hash_03001880e9e4c4191a5da189ae26d0e237f015>
-		<name>Get Script Data (Indexed)</name>
-		<type_id>4</type_id>
-		<input_string></input_string>
-		<fields>
-			<hash_070018d39556ecad6166701bfb0e28c5a11108>
-				<name>Index Type</name>
-				<update_rra></update_rra>
-				<regexp_match></regexp_match>
-				<allow_nulls></allow_nulls>
-				<type_code>index_type</type_code>
-				<input_output>in</input_output>
-				<data_name>index_type</data_name>
-			</hash_070018d39556ecad6166701bfb0e28c5a11108>
-			<hash_0700183b7caa46eb809fc238de6ef18b6e10d5>
-				<name>Index Value</name>
-				<update_rra></update_rra>
-				<regexp_match></regexp_match>
-				<allow_nulls></allow_nulls>
-				<type_code>index_value</type_code>
-				<input_output>in</input_output>
-				<data_name>index_value</data_name>
-			</hash_0700183b7caa46eb809fc238de6ef18b6e10d5>
-			<hash_07001874af2e42dc12956c4817c2ef5d9983f9>
-				<name>Output Type ID</name>
-				<update_rra></update_rra>
-				<regexp_match></regexp_match>
-				<allow_nulls></allow_nulls>
-				<type_code>output_type</type_code>
-				<input_output>in</input_output>
-				<data_name>output_type</data_name>
-			</hash_07001874af2e42dc12956c4817c2ef5d9983f9>
-			<hash_0700188ae57f09f787656bf4ac541e8bd12537>
-				<name>Output Value</name>
-				<update_rra>on</update_rra>
-				<regexp_match></regexp_match>
-				<allow_nulls></allow_nulls>
-				<type_code></type_code>
-				<input_output>out</input_output>
-				<data_name>output</data_name>
-			</hash_0700188ae57f09f787656bf4ac541e8bd12537>
-		</fields>
-	</hash_03001880e9e4c4191a5da189ae26d0e237f015>
 	<hash_000018d28b86240a5752f83b5ee0fde11ab178>
 		<name>Cisco - SFP statistics (dBm)</name>
 		<graph>
@@ -279,7 +236,7 @@
 		<ds>
 			<t_name></t_name>
 			<name>|host_description| - SFP Statistics - |query_device|</name>
-			<data_input_id>hash_03001880e9e4c4191a5da189ae26d0e237f015</data_input_id>
+			<data_input_id>hash030018332111d8b54ac8ce939af87a7eac0c06</data_input_id>
 			<t_rra_id></t_rra_id>
 			<t_rrd_step></t_rrd_step>
 			<rrd_step>300</rrd_step>
