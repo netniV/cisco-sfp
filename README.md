@@ -1,16 +1,16 @@
-# cisco-sfp for cacti 0.8.x
+# cisco-sfp for cacti 1.x
 This is to host code for https://forums.cacti.net/viewtopic.php?f=19&amp;t=23089 for others
 
 Cisco SFP statistics for cacti (c) 2007-2008 sodium 
 in 2017 the code copyright moved Github to Creative Commons BY-NC-SA
 
-This code is compatibile with cacti 0.8.x.  There may be issues with the 1.x versions of cacti.
+This code is compatibile with cacti 1.x.  There may be issues with the 0.8.x versions of cacti (use release versions of this script prior to 0.3.0).
 
 ## INSTALLATION :
 1. copy cisco_sfp.xml to [$cacti_home]/resources/script_server directory
-2. copy ss_65xx_sfp.php to [$cacti_home]/scripts directory
-3. import the following template (within cacti) `cacti_data_query_cisco_65xx_sfp_statistics.xml`
-4. add Cisco - 65xx - SFP statistics to your catalyst host template or add it to the "Associated Data Queries" in the devices list.
+2. copy ss_cisco_catalyst_sfp.php to [$cacti_home]/scripts directory
+3. import the following template (within cacti) `cacti_data_query_cisco_catalyst_sfp_statistics.xml`
+4. add Cisco - Catalyst - SFP statistics to your catalyst host template or add it to the "Associated Data Queries" in the devices list.
 
 That's it...
 
