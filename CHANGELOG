@@ -1,0 +1,24 @@
+v0.2.4	fixed: changes for 0.8.7b
+
+v0.2.3	fixed: typo's
+
+v0.2.2	small fixes for 0.8.7
+	changed: 
+		- ss_65xx_sfp.php 
+
+v0.2.1	added: LICENSE
+	fixed: typo's
+	changed:
+                - ss_65xx_sfp.php
+		- cisco_sfp.xml
+	
+v0.2b	added descr (ifAlias) to query types
+	changed:
+		- ss_65xx_sfp.php
+
+v0.1.1	fixed small typo's
+	changed: 
+		- cacti_data_query_cisco_65xx_sfp_statistics.xml
+		- ss_65xx_sfp.php
+
+v0.1	initial release
