@@ -1,3 +1,15 @@
+v0.3.0  changes for 1.x & renamed scripts and template to catalyst instead of 65xx
+	added: 
+		- cacti_data_query_cisco_catalyst_sfp_statistics.xml
+		- ss_cisco_catalyst_sfp.php
+	removed: 
+		- INSTALL
+		- ss_65xx_sfp.php 
+		- cacti_data_query_cisco_65xx_sfp_statistics.xml
+	changed: 
+		- README.md
+		- cisco_sfp.xml
+
 v0.2.4	fixed: changes for 0.8.7b
 
 v0.2.3	fixed: typo's

@@ -1,12 +1,12 @@
 <cacti>	
 	<hash_040018d8393f4a9c0e50894d794f8b22abf31c>
-		<name>Cisco - 65xx - SFP statistics</name>
-		<description>Cisco - 65xx - SFP statistics</description>
+		<name>Cisco - Catalyst - SFP statistics</name>
+		<description>Cisco - Catalyst - SFP statistics</description>
 		<xml_path>&lt;path_cacti&gt;/resource/script_server/cisco_sfp.xml</xml_path>
 		<data_input_id>hash_030018332111d8b54ac8ce939af87a7eac0c06</data_input_id>
 		<graphs>
 			<hash_11001830ddc085d497a4690cdd1d16141d57c5>
-				<name>Cisco - 65xx - SFP statistics</name>
+				<name>Cisco - Catalyst - SFP statistics</name>
 				<graph_template_id>hash_000018d28b86240a5752f83b5ee0fde11ab178</graph_template_id>
 				<rrd>
 					<item_000>
@@ -70,11 +70,54 @@
 			</hash_0700185be8fa85472d89c621790b43510b5043>
 		</fields>
 	</hash_030018332111d8b54ac8ce939af87a7eac0c06>
+	<hash_03001880e9e4c4191a5da189ae26d0e237f015>
+		<name>Get Script Data (Indexed)</name>
+		<type_id>4</type_id>
+		<input_string></input_string>
+		<fields>
+			<hash_070018d39556ecad6166701bfb0e28c5a11108>
+				<name>Index Type</name>
+				<update_rra></update_rra>
+				<regexp_match></regexp_match>
+				<allow_nulls></allow_nulls>
+				<type_code>index_type</type_code>
+				<input_output>in</input_output>
+				<data_name>index_type</data_name>
+			</hash_070018d39556ecad6166701bfb0e28c5a11108>
+			<hash_0700183b7caa46eb809fc238de6ef18b6e10d5>
+				<name>Index Value</name>
+				<update_rra></update_rra>
+				<regexp_match></regexp_match>
+				<allow_nulls></allow_nulls>
+				<type_code>index_value</type_code>
+				<input_output>in</input_output>
+				<data_name>index_value</data_name>
+			</hash_0700183b7caa46eb809fc238de6ef18b6e10d5>
+			<hash_07001874af2e42dc12956c4817c2ef5d9983f9>
+				<name>Output Type ID</name>
+				<update_rra></update_rra>
+				<regexp_match></regexp_match>
+				<allow_nulls></allow_nulls>
+				<type_code>output_type</type_code>
+				<input_output>in</input_output>
+				<data_name>output_type</data_name>
+			</hash_07001874af2e42dc12956c4817c2ef5d9983f9>
+			<hash_0700188ae57f09f787656bf4ac541e8bd12537>
+				<name>Output Value</name>
+				<update_rra>on</update_rra>
+				<regexp_match></regexp_match>
+				<allow_nulls></allow_nulls>
+				<type_code></type_code>
+				<input_output>out</input_output>
+				<data_name>output</data_name>
+			</hash_0700188ae57f09f787656bf4ac541e8bd12537>
+		</fields>
+	</hash_03001880e9e4c4191a5da189ae26d0e237f015>
 	<hash_000018d28b86240a5752f83b5ee0fde11ab178>
 		<name>Cisco - SFP statistics (dBm)</name>
 		<graph>
 			<t_title></t_title>
-			<title>|host_description| SFP |query_device| - |query_descr|</title>
+			<title>|host_description| SFP |query_interface| - |query_descr|</title>
 			<t_image_format_id></t_image_format_id>
 			<image_format_id>1</image_format_id>
 			<t_height></t_height>
@@ -232,11 +275,11 @@
 		</inputs>
 	</hash_000018d28b86240a5752f83b5ee0fde11ab178>
 	<hash_01001836235416ea6d526678a4e2470baf7b47>
-		<name>Cisco 65xx - SFP statistics</name>
+		<name>Cisco Catalyst - SFP statistics</name>
 		<ds>
 			<t_name></t_name>
-			<name>|host_description| - SFP Statistics - |query_device|</name>
-			<data_input_id>hash030018332111d8b54ac8ce939af87a7eac0c06</data_input_id>
+			<name>|host_description| - SFP Statistics - |query_interface|</name>
+			<data_input_id>hash_03001880e9e4c4191a5da189ae26d0e237f015</data_input_id>
 			<t_rra_id></t_rra_id>
 			<t_rrd_step></t_rrd_step>
 			<rrd_step>300</rrd_step>
