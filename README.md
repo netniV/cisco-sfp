@@ -6,7 +6,7 @@ Cisco SFP Statistics for Cacti (c) 2007-2008 sodium in 2017 the code copyright m
 ## Version compatibility
 Version | Branch | Compatability
 --- | --- | ---
-[v0.3.0](https://github.com/netniV/cisco-sfp/releases/tag/0.3.0) - vx.x.x | [master](https://github.com/netniV/cisco-sfp/tree/master) | This code is compatibile with Cacti 1.x. | 
+[v0.3.0](https://github.com/netniV/cisco-sfp/releases/tag/0.3.0) - vx.x.x | [master](https://github.com/netniV/cisco-sfp/tree/master) | This code is compatible with Cacti 1.x. | 
 x.x.x - [v0.2.5](https://github.com/netniV/cisco-sfp/releases/tag/0.2.5) | [cacti-v.0.8.8](https://github.com/netniV/cisco-sfp/tree/cacti-v0.8.8) | This code is compatible with Cacti 0.8.8x
 
 ## How to install
