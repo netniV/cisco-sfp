@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /*
  +-------------------------------------------------------------------------+
@@ -243,8 +244,8 @@ $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $m
 				$result = cacti_snmp_get($hostname, $snmp_community, '.1.3.6.1.4.1.9.9.91.1.1.1.1.4.' . $int, $snmp_version, $snmp_auth_username, $snmp_auth_password, $snmp_auth_protocol,
 $snmp_priv_passphrase, $snmp_priv_protocol, $snmp_context, $snmp_port, $snmp_timeout, $ping_retries, $max_oids, SNMP_POLLER)/10;
 			} else {
-				// if not ok, send -40, symbolic for lights off
-				$result = "-40";
+				// if not ok, send -U, this will create a gap in the graph, indicating that the data is unavailable
+				$result = "-U";
 			}
 
 			return trim($result);
